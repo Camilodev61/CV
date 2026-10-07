@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f4efe6;
+  --color-paper: #fbf8f2;
+  --color-ink: #1a1815;
+  --color-ink-soft: #3a362f;
+  --color-muted: #6e675c;
+  --color-muted-dark: #9a9384;
+  --color-cream-soft: #c9c2b4;
+  --color-line-dark: #4a453d;
+  --color-line-darker: #35312a;
+  --color-accent: #ff5a24;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-cream);
+}
+
+/* ---------- Hero: name as letter tiles ----------
+   1. tile-in: each letter tips up from its base like a domino (once, on load).
+   2. breeze: a soft wave rolls through the tiles every 6s, like wind over cards.
+   3. hover: a tile flips a full turn; leaving snaps back invisibly (360deg == 0deg). */
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    transform: rotateX(-85deg) translateY(18%);
+    transform-origin: 50% 100%;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    transform-origin: 50% 100%;
+  }
+}
+
+@keyframes breeze {
+  0%,
+  15%,
+  100% {
+    transform: none;
+  }
+  4% {
+    transform: rotateX(-32deg) translateY(-4%);
+  }
+  9% {
+    transform: rotateX(10deg);
+  }
+}
+
+.tile {
+  transform-style: preserve-3d;
+  animation: tile-in 800ms var(--ease-out) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+.tile-face {
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+  animation: breeze 6000ms var(--ease-in-out) infinite;
+  animation-delay: var(--breeze-delay, 0ms);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover {
+    transform: rotateX(360deg);
+    transition: transform 600ms var(--ease-in-out);
+  }
+}
+
+/* Hero meta + CTAs fade up after the name lands */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.enter {
+  animation: fade-up 700ms var(--ease-out) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  animation: blink 1s step-end infinite;
+}
+
+/* Button label swap: blur bridges the two states so it reads as one morph */
+@keyframes label-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.enter-label {
+  animation: label-in 200ms var(--ease-out) both;
+}
+
+/* ---------- Scroll reveal: fires once, children stagger via --i ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+[data-visible] .reveal,
+.reveal[data-visible] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tile {
+    animation-name: fade-in;
+    animation-duration: 300ms;
+  }
+
+  .tile-face {
+    animation: none;
+  }
+
+  .tile:hover {
+    transform: none;
+  }
+
+  .enter {
+    animation-name: fade-in;
+    animation-duration: 300ms;
+  }
+
+  .reveal {
+    transform: none;
+    transition: opacity 300ms ease;
+  }
+
+  .caret {
+    animation: none;
+  }
+
+  .enter-label {
+    animation-name: fade-in;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#F4EFE6; }
+  ::selection { background:#FF5A24; color:#F4EFE6; }
+  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes nameReveal { 0%{opacity:0;transform:translateY(60px) skewY(3deg);} 100%{opacity:1;transform:translateY(0) skewY(0);} }
+  .name-line { display:block; animation: nameReveal 0.9s cubic-bezier(.16,1,.3,1) both; }
+  a { color:#FF5A24; }
+  a:hover { color:#1A1815; }
+</style>
+</helmet>
+
+<div style="font-family:'Archivo',sans-serif;background:#F4EFE6;color:#1A1815;overflow-x:hidden;position:relative;">
+
+  <div style="position:fixed;top:0;left:0;height:4px;background:#FF5A24;z-index:200;transition:width 0.1s linear;width:{{ progressPct }}%;"></div>
+
+  <!-- HERO -->
+  <section style="min-height:100vh;padding:56px 6vw 80px;position:relative;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.05em;color:#7A7368;">
+      <span>01 / CV</span>
+      <span style="text-align:right;">FRONTEND<br/>DEVELOPER</span>
+    </div>
+
+    <div style="margin-top:40px;">
+      <h1 class="name-line" style="font-size:clamp(56px,13vw,180px);line-height:0.85;font-weight:900;margin:0;letter-spacing:-0.02em;text-transform:uppercase;animation-delay:0s;">CAMILO</h1>
+      <h1 class="name-line" style="font-size:clamp(56px,13vw,180px);line-height:0.85;font-weight:900;margin:0;letter-spacing:-0.02em;text-transform:uppercase;color:#FF5A24;animation-delay:0.12s;">HERNANDEZ<span style="color:#1A1815;">.</span></h1>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:32px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#7A7368;text-transform:uppercase;border-top:1px solid rgba(26,24,21,0.15);padding-top:16px;">
+      <div>Bienvenido a<br/><span style="color:#1A1815;">mi portafolio</span></div>
+      <div>[Stack]<br/><span style="color:#1A1815;">React · Next.js · TS</span></div>
+      <div>[Sector]<br/><span style="color:#1A1815;">Fintech SaaS</span></div>
+      <div>Bogotá, Colombia<br/><span style="color:#1A1815;">disponible remoto</span></div>
+    </div>
+
+    <div style="margin-top:36px;font-family:'Space Mono',monospace;font-size:16px;min-height:26px;color:#1A1815;">
+      &gt; {{ typedText }}<span style="animation:blink 1s step-end infinite;">_</span>
+    </div>
+
+    <div style="display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;">
+      <a href="#proyectos" style="text-decoration:none;background:#1A1815;color:#F4EFE6;padding:16px 30px;border-radius:100px;font-weight:700;font-size:15px;display:inline-block;" style-hover="background:#FF5A24;color:#1A1815;">Ver proyectos</a>
+      <a href="#contacto" style="text-decoration:none;background:transparent;color:#1A1815;padding:16px 30px;border-radius:100px;font-weight:700;font-size:15px;border:1.5px solid #1A1815;display:inline-block;" style-hover="background:#1A1815;color:#F4EFE6;">Contactar</a>
+    </div>
+  </section>
+
+  <!-- PERFIL -->
+  <section ref="{{ refs.perfil }}" style="{{ revealStyle.perfil }} padding:100px 6vw;display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;box-sizing:border-box;">
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:13px;color:#7A7368;margin-bottom:20px;">02 / PERFIL</div>
+      <div style="font-family:'Space Mono',monospace;font-size:13px;color:#7A7368;margin-bottom:8px;">Spoiler alert:</div>
+      <p style="font-size:22px;font-weight:700;margin:0 0 24px;line-height:1.3;">"No siempre planeé ser desarrollador. La vida tenía otros planes."</p>
+      <p style="font-size:16px;line-height:1.7;color:#3A362F;max-width:56ch;">Frontend Developer especializado en React, Next.js y TypeScript, con experiencia construyendo productos SaaS en el sector fintech. Crea interfaces reutilizables y de alto rendimiento aplicando React.memo, useMemo, lazy loading y code splitting. Integra agentes de IA en terminal (Claude Code, OpenCode) para acelerar ciclos de desarrollo.</p>
+
+      <div style="display:flex;gap:48px;margin-top:36px;">
+        <div>
+          <div style="font-size:44px;font-weight:900;color:#FF5A24;">{{ counts.years }}+</div>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;color:#7A7368;text-transform:uppercase;">Años de experiencia</div>
+        </div>
+        <div>
+          <div style="font-size:44px;font-weight:900;color:#FF5A24;">{{ counts.projects }}+</div>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;color:#7A7368;text-transform:uppercase;">Proyectos entregados</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:13px;">
+        <a href="mailto:camilodev61@outlook.com" style="text-decoration:none;color:#1A1815;border:1px solid rgba(26,24,21,0.25);padding:8px 16px;border-radius:100px;">camilodev61@outlook.com</a>
+        <a href="https://github.com/camilodev61" style="text-decoration:none;color:#1A1815;border:1px solid rgba(26,24,21,0.25);padding:8px 16px;border-radius:100px;">github.com/camilodev61</a>
+      </div>
+    </div>
+    <div style="position:relative;aspect-ratio:1/1.1;">
+      <div style="position:absolute;inset:0;background:#FF5A24;border-radius:46% 54% 58% 42% / 50% 46% 54% 50%;"></div>
+      <div style="position:absolute;inset:22px;">
+        <image-slot id="perfil-foto" shape="circle" placeholder="Foto de Camilo"></image-slot>
+      </div>
+      <div style="position:absolute;top:-10px;right:14%;font-family:'Space Mono',monospace;font-size:13px;color:#1A1815;transform:rotate(-6deg);">ese soy yo →</div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section ref="{{ refs.stack }}" style="{{ revealStyle.stack }} padding:100px 6vw;box-sizing:border-box;">
+    <div style="font-family:'Space Mono',monospace;font-size:13px;color:#7A7368;margin-bottom:12px;">03 / STACK TÉCNICO</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;margin:0 0 48px;letter-spacing:-0.01em;">Lo que sé usar</h2>
+    <sc-for list="{{ stackGroups }}" as="group" hint-placeholder-count="5">
+      <div style="margin-bottom:32px;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;color:#7A7368;margin-bottom:14px;letter-spacing:0.05em;">{{ group.title }}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <sc-for list="{{ group.items }}" as="tag" hint-placeholder-count="4">
+            <span style="display:inline-block;background:#1A1815;color:#F4EFE6;padding:10px 18px;border-radius:100px;font-size:14px;font-weight:700;transition:transform 0.2s,background 0.2s;cursor:default;" style-hover="transform:scale(1.08);background:#FF5A24;color:#1A1815;">{{ tag }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section ref="{{ refs.experiencia }}" style="{{ revealStyle.experiencia }} padding:100px 6vw;box-sizing:border-box;">
+    <div style="font-family:'Space Mono',monospace;font-size:13px;color:#7A7368;margin-bottom:12px;">04 / EXPERIENCIA</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;margin:0 0 56px;letter-spacing:-0.01em;">Dónde he construido cosas</h2>
+    <div style="position:relative;max-width:820px;">
+      <div style="position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:rgba(26,24,21,0.15);"></div>
+      <div style="position:absolute;left:7px;top:8px;width:2px;background:#FF5A24;transition:height 1.4s ease;height:{{ timelineHeight }};"></div>
+      <sc-for list="{{ experiencias }}" as="job" hint-placeholder-count="3">
+        <div style="position:relative;padding:0 0 48px 40px;">
+          <div style="position:absolute;left:0px;top:6px;width:16px;height:16px;border-radius:50%;background:#F4EFE6;border:3px solid #FF5A24;"></div>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;color:#7A7368;margin-bottom:6px;">{{ job.periodo }}</div>
+          <div style="font-size:22px;font-weight:800;">{{ job.rol }}</div>
+          <div style="font-size:15px;color:#FF5A24;font-weight:700;margin-bottom:10px;">{{ job.empresa }}</div>
+          <sc-for list="{{ job.bullets }}" as="b" hint-placeholder-count="2">
+            <div style="font-size:15px;line-height:1.6;color:#3A362F;margin-bottom:4px;">— {{ b }}</div>
+          </sc-for>
+          <sc-if value="{{ job.metrics }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+              <sc-for list="{{ job.metrics }}" as="m" hint-placeholder-count="2">
+                <span style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;background:#1A1815;color:#FF5A24;padding:6px 14px;border-radius:100px;">{{ m }}</span>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos" ref="{{ refs.proyectos }}" style="{{ revealStyle.proyectos }} padding:100px 6vw;box-sizing:border-box;">
+    <div style="font-family:'Space Mono',monospace;font-size:13px;color:#7A7368;margin-bottom:12px;">05 / PROYECTOS</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;margin:0 0 48px;letter-spacing:-0.01em;">Cosas que he construido</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+      <sc-for list="{{ proyectos }}" as="p" hint-placeholder-count="3">
+        <div style="border:1.5px solid rgba(26,24,21,0.15);border-radius:20px;padding:32px;background:#FBF8F2;transition:transform 0.25s,box-shadow 0.25s;" style-hover="transform:translateY(-6px);box-shadow:0 16px 32px rgba(26,24,21,0.1);">
+          <div style="font-size:22px;font-weight:800;margin-bottom:10px;">{{ p.nombre }}</div>
+          <div style="font-size:15px;color:#3A362F;line-height:1.6;margin-bottom:18px;">{{ p.desc }}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="3">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:#7A7368;border:1px solid rgba(26,24,21,0.2);padding:4px 10px;border-radius:100px;">{{ t }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- EDUCACION -->
+  <section ref="{{ refs.educacion }}" style="{{ revealStyle.educacion }} padding:100px 6vw;box-sizing:border-box;">
+    <div style="font-family:'Space Mono',monospace;font-size:13px;color:#7A7368;margin-bottom:12px;">06 / EDUCACIÓN</div>
+    <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;margin:0 0 40px;letter-spacing:-0.01em;">Formación</h2>
+    <div style="display:flex;flex-direction:column;gap:0;max-width:760px;border-top:1px solid rgba(26,24,21,0.15);">
+      <sc-for list="{{ educacion }}" as="e" hint-placeholder-count="4">
+        <div style="display:flex;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid rgba(26,24,21,0.15);flex-wrap:wrap;">
+          <div style="font-size:18px;font-weight:700;">{{ e.titulo }}</div>
+          <div style="font-family:'Space Mono',monospace;font-size:13px;color:#7A7368;text-align:right;">{{ e.institucion }}<br/>{{ e.periodo }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- CONTACTO + FOOTER (dark) -->
+  <section id="contacto" ref="{{ refs.contacto }}" style="{{ revealStyle.contacto }} background:#1A1815;color:#F4EFE6;padding:100px 6vw 40px;box-sizing:border-box;">
+    <div style="font-family:'Space Mono',monospace;font-size:13px;color:#9A9384;margin-bottom:12px;">07 / CONTACTO</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;">
+      <div>
+        <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;margin:0 0 20px;letter-spacing:-0.01em;">Hablemos<span style="color:#FF5A24;">.</span></h2>
+        <p style="font-size:16px;line-height:1.7;color:#C9C2B4;max-width:44ch;margin-bottom:28px;">¿Un proyecto fintech, un rol de frontend o simplemente quieres saludar? Escríbeme.</p>
+        <div style="font-family:'Space Mono',monospace;font-size:14px;line-height:2.2;">
+          <div>📍 Bogotá, Colombia — remoto</div>
+          <div>(+57) 321 697 6406</div>
+          <div><a href="mailto:camilodev61@outlook.com" style="color:#FF5A24;">camilodev61@outlook.com</a></div>
+          <div><a href="https://linkedin.com/in/camilohernandez" style="color:#FF5A24;">linkedin.com/in/camilohernandez</a></div>
+          <div><a href="https://github.com/camilodev61" style="color:#FF5A24;">github.com/camilodev61</a></div>
+          <div><a href="https://camilodev61.github.io/mi-portafolio" style="color:#FF5A24;">camilodev61.github.io/mi-portafolio</a></div>
+        </div>
+      </div>
+      <form onSubmit="{{ handleSubmit }}" style="display:flex;flex-direction:column;gap:16px;">
+        <input type="text" placeholder="Nombre" value="{{ form.name }}" onChange="{{ setName }}" required="{{ true }}" style="background:transparent;border:none;border-bottom:1.5px solid #4A453D;padding:12px 0;font-family:'Archivo',sans-serif;font-size:16px;color:#F4EFE6;outline:none;" />
+        <input type="email" placeholder="Email" value="{{ form.email }}" onChange="{{ setEmail }}" required="{{ true }}" style="background:transparent;border:none;border-bottom:1.5px solid #4A453D;padding:12px 0;font-family:'Archivo',sans-serif;font-size:16px;color:#F4EFE6;outline:none;" />
+        <textarea placeholder="Mensaje" value="{{ form.message }}" onChange="{{ setMessage }}" required="{{ true }}" rows="4" style="background:transparent;border:none;border-bottom:1.5px solid #4A453D;padding:12px 0;font-family:'Archivo',sans-serif;font-size:16px;color:#F4EFE6;outline:none;resize:vertical;"></textarea>
+        <button type="submit" style="margin-top:8px;background:#FF5A24;color:#1A1815;border:none;padding:16px 30px;border-radius:100px;font-weight:800;font-size:15px;cursor:pointer;transition:background 0.2s;" style-hover="background:#F4EFE6;">{{ submitLabel }}</button>
+      </form>
+    </div>
+
+    <div style="margin-top:100px;padding-top:24px;border-top:1px solid #35312A;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'Space Mono',monospace;font-size:12px;color:#7A7368;">
+      <span>© 2026 Camilo Hernández</span>
+      <span>Construido con React + Next.js</span>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FF5A24&quot;,&quot;options&quot;:[&quot;#FF5A24&quot;,&quot;#0F62FE&quot;,&quot;#1A1815&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = {
+    typedText: '',
+    progressPct: 0,
+    revealed: { perfil:false, stack:false, experiencia:false, proyectos:false, educacion:false, contacto:false },
+    counts: { years: 0, projects: 0 },
+    form: { name:'', email:'', message:'' },
+    submitLabel: 'Enviar mensaje',
+  };
+
+  fullText = 'Frontend Developer — React / Next.js / TypeScript';
+
+  constructor(props) {
+    super(props);
+    this.refs_ = { perfil: React.createRef(), stack: React.createRef(), experiencia: React.createRef(), proyectos: React.createRef(), educacion: React.createRef(), contacto: React.createRef() };
+  }
+
+  componentDidMount() {
+    let i = 0;
+    this._typeInterval = setInterval(() => {
+      i++;
+      this.setState({ typedText: this.fullText.slice(0, i) });
+      if (i >= this.fullText.length) clearInterval(this._typeInterval);
+    }, 45);
+
+    this._onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = h > 0 ? Math.min(100, Math.max(0, (window.scrollY / h) * 100)) : 0;
+      this.setState({ progressPct: pct });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    this._observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const key = entry.target.getAttribute('data-key');
+          this.setState((s) => ({ revealed: { ...s.revealed, [key]: true } }));
+          if (key === 'perfil') this.animateCounts();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    Object.entries(this.refs_).forEach(([key, ref]) => {
+      if (ref.current) {
+        ref.current.setAttribute('data-key', key);
+        this._observer.observe(ref.current);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._typeInterval);
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._observer) this._observer.disconnect();
+  }
+
+  animateCounts() {
+    if (this._countsStarted) return;
+    this._countsStarted = true;
+    const targets = { years: 2, projects: 8 };
+    const duration = 900;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      this.setState({ counts: { years: Math.round(targets.years * t), projects: Math.round(targets.projects * t) } });
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  revealStyleFor(key) {
+    const r = this.state.revealed[key];
+    return `opacity:${r ? 1 : 0};transform:translateY(${r ? 0 : 32}px);transition:opacity 0.8s ease,transform 0.8s ease;`;
+  }
+
+  renderVals() {
+    const accent = this.props.accentColor ?? '#FF5A24';
+    const revealStyle = {};
+    ['perfil','stack','experiencia','proyectos','educacion','contacto'].forEach((k) => { revealStyle[k] = this.revealStyleFor(k); });
+
+    const experiencias = [
+      { periodo: 'Jun 2026 – Presente', rol: 'Desarrollador de Plataforma', empresa: 'PMI (Fintech Pay In/Pay Out)',
+        bullets: ['Plataforma de pagos para flujos pay in/pay out en entorno de alta disponibilidad.', 'Módulos transaccionales con React/Next.js para cobro y dispersión.', 'Integración de APIs de pagos y conciliación con backend.'], metrics: null },
+      { periodo: 'Jun 2025 – May 2026', rol: 'Frontend Developer', empresa: 'Kambia.la (SaaS Fintech)',
+        bullets: ['Componentes reutilizables en React/Next.js/TypeScript.', 'Optimización con React.memo, useMemo, lazy loading y code splitting.', 'Integración de agentes de IA (Claude Code, OpenCode).'], metrics: null },
+      { periodo: '2019 – 2022', rol: 'Auxiliar de Sistemas y Desarrollo Web', empresa: 'Constructora Jeinco',
+        bullets: ['Administración de +100 cuentas Google Workspace con 2FA y backup automatizado.', 'Sitio web corporativo en HTML/CSS/JS.'], metrics: ['99.9% uptime', '+100 cuentas', '-30% incidentes', '+15% tráfico'] },
+    ];
+
+    return {
+      typedText: this.state.typedText,
+      progressPct: this.state.progressPct,
+      revealStyle,
+      refs: this.refs_,
+      counts: this.state.counts,
+      timelineHeight: this.state.revealed.experiencia ? '100%' : '0%',
+      stackGroups: [
+        { title: 'Frontend', items: ['React','Next.js','TypeScript','JavaScript','HTML/CSS','Tailwind CSS','Material UI','Hero UI'] },
+        { title: 'Herramientas', items: ['Git & GitHub','Figma','VS Code','Terminal/Bash','Playwright (E2E)','SDD','Scrum/Agile','Photoshop','Illustrator'] },
+        { title: 'Office', items: ['Google Workspace','Microsoft 365'] },
+        { title: 'IA & LLMs', items: ['Claude Code','OpenCode','Codex','Claude/ChatGPT','Prompt Engineering'] },
+        { title: 'Idiomas', items: ['Español (nativo)','Inglés (intermedio)'] },
+      ],
+      experiencias,
+      proyectos: [
+        { nombre: 'Dashboard Kambia.la', desc: 'Arquitectura de componentes y optimización de performance para plataforma fintech SaaS.', tags: ['React','Next.js','TypeScript','Axios'] },
+        { nombre: 'Dashboard Back Office', desc: 'Módulo de gestión interna con flujos de datos en tiempo real.', tags: ['React','Next.js','Material UI','Axios'] },
+        { nombre: 'Havitat — Admin Conjuntos', desc: 'Refactor y mejora de arquitectura del panel de administración de conjuntos residenciales.', tags: ['React','Next.js','TypeScript','Context API'] },
+      ],
+      educacion: [
+        { titulo: 'Ingeniería de Software', institucion: 'Politécnico Grancolombiano', periodo: '2023 – (7.° sem/8)' },
+        { titulo: 'Frontend Developer', institucion: 'Oracle ONE / Oracle Next Education', periodo: '2024 –' },
+        { titulo: 'MySQL', institucion: 'Oracle ONE / Oracle Next Education', periodo: '2025' },
+        { titulo: 'Cloud Infrastructure', institucion: 'Oracle ONE / Oracle Next Education', periodo: '2025' },
+      ],
+      form: this.state.form,
+      setName: (e) => this.setState((s) => ({ form: { ...s.form, name: e.target.value } })),
+      setEmail: (e) => this.setState((s) => ({ form: { ...s.form, email: e.target.value } })),
+      setMessage: (e) => this.setState((s) => ({ form: { ...s.form, message: e.target.value } })),
+      submitLabel: this.state.submitLabel,
+      handleSubmit: (e) => {
+        e.preventDefault();
+        this.setState({ submitLabel: 'Enviando…' });
+        setTimeout(() => {
+          this.setState({ submitLabel: '¡Mensaje enviado!', form: { name:'', email:'', message:'' } });
+          setTimeout(() => this.setState({ submitLabel: 'Enviar mensaje' }), 2500);
+        }, 700);
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
